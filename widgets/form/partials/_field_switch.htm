@@ -1,8 +1,14 @@
+<?php
+    $previewMode = false;
+    if ($this->previewMode || $field->readOnly) {
+        $previewMode = true;
+    }
+?>
 <!-- Switch -->
 <div class="field-switch">
     <label><?= e(trans($field->label)) ?></label>
     <?php if ($field->comment): ?>
-        <p class="help-block"><?= e(trans($field->comment)) ?></p>
+        <p class="help-block"><?= $field->commentHtml ? trans($field->comment) : e(trans($field->comment)) ?></p>
     <?php endif ?>
 </div>
 
@@ -10,15 +16,15 @@
     type="hidden"
     name="<?= $field->getName() ?>"
     value="0"
-    <?= $this->previewMode ? 'disabled="disabled"' : '' ?>>
+    <?= $previewMode ? 'disabled="disabled"' : '' ?>>
 
-<label class="custom-switch" <?= $this->previewMode ? 'onclick="return false"' : '' ?>>
+<label class="custom-switch" <?= $previewMode ? 'onclick="return false"' : '' ?>>
     <input
         type="checkbox"
         id="<?= $field->getId() ?>"
         name="<?= $field->getName() ?>"
         value="1"
-        <?= $this->previewMode ? 'readonly="readonly"' : '' ?>
+        <?= $previewMode ? 'readonly="readonly"' : '' ?>
         <?= $field->value == 1 ? 'checked="checked"' : '' ?>
         <?= $field->getAttributes() ?>>
     <span><span><?= e(trans('backend::lang.form.field_on')) ?></span><span><?= e(trans('backend::lang.form.field_off')) ?></span></span>
