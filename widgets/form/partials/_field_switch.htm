@@ -5,6 +5,10 @@
     }
 ?>
 <!-- Switch -->
+<?php
+    $on = isset($field->config['on']) ? $field->config['on'] : 'backend::lang.form.field_on';
+    $off = isset($field->config['off']) ? $field->config['off'] : 'backend::lang.form.field_off';
+?>
 <div class="field-switch">
     <label><?= e(trans($field->label)) ?></label>
     <?php if ($field->comment): ?>
@@ -27,6 +31,6 @@
         <?= $previewMode ? 'readonly="readonly"' : '' ?>
         <?= $field->value == 1 ? 'checked="checked"' : '' ?>
         <?= $field->getAttributes() ?>>
-    <span><span><?= e(trans('backend::lang.form.field_on')) ?></span><span><?= e(trans('backend::lang.form.field_off')) ?></span></span>
+    <span><span><?= e(trans($on)) ?></span><span><?= e(trans($off)) ?></span></span>
     <a class="slide-button"></a>
 </label>
